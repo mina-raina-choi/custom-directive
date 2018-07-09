@@ -6,8 +6,10 @@ import { Directive, ElementRef, Renderer, HostListener, HostBinding, Input } fro
     // <div class="card card-block" ccCardHover>...</div>
 })
 export class CardHoverDirective {
+    // html에서 ngClass를 이용해 [class.card-outline-primary]="ishovering" 으로 사용할 수도 있다.
     @HostBinding('class.card-outline-primary') private ishovering: boolean;
 
+    // ccCardHover디렉티브에 querySelector라는 프로퍼티를 만들어 상황에 맞게 querySeletor를 수정할 수 있게끔.
     @Input('ccCardHover') config: any = {
         querySelector : '.card-text'
     };
