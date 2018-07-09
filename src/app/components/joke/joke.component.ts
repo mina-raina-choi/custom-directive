@@ -7,10 +7,7 @@ import { Joke } from '../joke';
   <div class="card card-block" ccCardHover>
     <h4 class="card-title">{{data.setup}}</h4>
     <p class="card-text"
-     [hidden]="data.hide">{{data.punchline}}</p>
-    <button (click)="data.toggle()"
-       class="btn btn-primary">Tell Me
-    </button>
+    [style.display]="'none'">{{data.punchline}}</p>
   </div>
   `
   })
