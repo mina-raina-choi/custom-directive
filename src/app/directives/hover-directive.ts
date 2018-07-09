@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer, HostListener, HostBinding } from '@angular/core';
+import { Directive, ElementRef, Renderer, HostListener, HostBinding, Input } from '@angular/core';
 
 @Directive({
     selector: '[ccCardHover]'
@@ -6,7 +6,11 @@ import { Directive, ElementRef, Renderer, HostListener, HostBinding } from '@ang
     // <div class="card card-block" ccCardHover>...</div>
 })
 export class CardHoverDirective {
-    @HostBinding('class.card-outline-primary') private ishovering: boolean; 
+    @HostBinding('class.card-outline-primary') private ishovering: boolean;
+
+    @Input('ccCardHover') config: any = {
+        querySelector : '.card-text'
+    };
 
     // 디렉티브가 생성될 때, 앵귤러는 ElementRef를 주입할 수 있다. 
     constructor(private el: ElementRef, private renderer: Renderer) {
@@ -15,13 +19,15 @@ export class CardHoverDirective {
     }
 
     @HostListener('mouseover') onmouseover() {
-        let part = this.el.nativeElement.querySelector('.card-text')
+        // let part = this.el.nativeElement.querySelector('.card-text')
+        let part = this.el.nativeElement.querySelector(this.config.querySelector);
         this.renderer.setElementStyle(part, 'display', 'block')
         this.ishovering = true;
     }
 
     @HostListener('mouseout') onmouseout() {
-        let part = this.el.nativeElement.querySelector('.card-text')
+        // let part = this.el.nativeElement.querySelector('.card-text')
+        let part = this.el.nativeElement.querySelector(this.config.querySelector);
         this.renderer.setElementStyle(part, 'display', 'none')
         this.ishovering = false;
     }
